@@ -25,6 +25,11 @@ Plugin 'bling/vim-airline'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'edkolev/promptline.vim'
 Plugin 'moll/vim-node'
+Bundle 'mattn/webapi-vim'
+Bundle 'mattn/gist-vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'maksimr/vim-jsbeautify'
+Plugin 'einars/js-beautify'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -40,6 +45,7 @@ set background=dark
 colorscheme solarized
 
 set cursorline
+set smartindent
 set expandtab
 set modelines=0
 set shiftwidth=2
@@ -93,7 +99,7 @@ nnoremap j gj
 nnoremap k gk
 
 " format the entire file
-nmap <leader>fef ggVG=
+nmap <leader>fef :normal! gg=G``<CR>
 
 " Resize buffers
 if bufwinnr(1)
@@ -107,7 +113,7 @@ endif
 map <F2> :GundoToggle<CR>
 
 " NERDTree
-nmap <leader>n :NERDTreeToggle<CR>
+nmap <leader>n :NERDTreeToggle<CR> :NERDTreeMirror<CR><CR>
 nmap <leader>m :NERDTreeFind<CR>
 let NERDTreeHighlightCursorline=1
 let NERDTreeIgnore = ['tmp', '.yardoc', 'pkg']
@@ -119,10 +125,14 @@ let g:syntastic_ruby_exec = '~/.rvm/rubies/ruby-2.0.0-p0/bin/ruby'
 
 " CtrlP
 nnoremap <silent> t :CtrlP<cr>
-let g:ctrlp_working_path_mode = 'rw'
+let g:ctrlp_working_path_mode = 2
 let g:ctrlp_by_filename = 1
 let g:ctrlp_max_files = 600
 let g:ctrlp_max_depth = 5
+let g:ctrlp_custom_ignore = {
+      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+      \ 'file': '\.pyc$\|\.pyo$\|\.rbc$|\.rbo$\|\.class$\|\.o$\|\~$\',
+      \ }
 
 " Toggle paste mode
 nmap <silent> <F4> :set invpaste<CR>:set paste?<CR>
@@ -134,7 +144,9 @@ map <leader>rt :TagbarToggle<CR>
 "Zoomwin
 map <leader>zw :ZoomWin<CR>
 
-"
+"Ack
 map <leader>f :Ack<space>
 
-autocmd BufEnter * lcd %:p:h
+".vimrc
+
+map <leader>geg :call JsBeautify()<cr>
