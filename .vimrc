@@ -86,9 +86,6 @@ au BufRead,BufNewFile *.go set filetype=go
 " No show command
 autocmd VimEnter * set nosc
 
-" Quick ESC
-imap jj <ESC>
-
 " Jump to the next row on long lines
 map <Down> gj
 map <Up>   gk
@@ -111,6 +108,7 @@ map <F2> :GundoToggle<CR>
 
 " NERDTree
 nmap <leader>n :NERDTreeToggle<CR>
+nmap <leader>m :NERDTreeFind<CR>
 let NERDTreeHighlightCursorline=1
 let NERDTreeIgnore = ['tmp', '.yardoc', 'pkg']
 let NERDTreeShowHidden=1
@@ -121,7 +119,7 @@ let g:syntastic_ruby_exec = '~/.rvm/rubies/ruby-2.0.0-p0/bin/ruby'
 
 " CtrlP
 nnoremap <silent> t :CtrlP<cr>
-let g:ctrlp_working_path_mode = 2
+let g:ctrlp_working_path_mode = 'rw'
 let g:ctrlp_by_filename = 1
 let g:ctrlp_max_files = 600
 let g:ctrlp_max_depth = 5
@@ -135,3 +133,8 @@ map <leader>rt :TagbarToggle<CR>
 
 "Zoomwin
 map <leader>zw :ZoomWin<CR>
+
+"
+map <leader>f :Ack<space>
+
+autocmd BufEnter * lcd %:p:h
